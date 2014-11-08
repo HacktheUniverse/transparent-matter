@@ -19,6 +19,7 @@ import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import json
 import scipy.constants as cons
+
 rcParams["savefig.dpi"] = 150
 rcParams["axes.facecolor"] = '#000000'
 rcParams["axes.linewidth"]=2
@@ -86,7 +87,7 @@ if __name__ == "__main__":
     
     #exponentially distribute stars from center of galaxy
     stars_r = [width*random.exponential(lambda_) for i in range(number_of_stars)]
-    stars_theta = [random.uniform(2.0)*np.pi for i in range(number_of_stars)]
+    stars_theta = [random.uniform(2.0*np.pi) for i in range(number_of_stars)]
     stars_x = [stars_r[i]*np.cos(stars_theta[i]) for i in range(number_of_stars)]
     stars_y = [stars_r[i]*np.sin(stars_theta[i]) for i in range(number_of_stars)]
     
@@ -112,7 +113,7 @@ if __name__ == "__main__":
             stars_x[s], stars_y[s] = rotate(stars_x[s], stars_y[s], new_angle)
             #save position
             positions[t][s] = (stars_x[s], stars_y[s])
-    json.dumps(positions)
+    #json.dumps(positions)
     
     #VISUALIZE
     #plt.close('all')
