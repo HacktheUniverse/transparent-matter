@@ -29,16 +29,6 @@ a.navbar-brand{
   height: 400px;
 }
 
-form
-{
-  margin: 40px 0;
-}
-
-div
-{
-  clear: both;
-  margin: 0 50px;
-}
 
 input.switch:empty
 {
@@ -99,7 +89,7 @@ input.switch:checked ~ label:after
 
 
 .btn-group{
-  top: -250px;
+  top: 20px;
   right: 60px;
   padding-left: 20px;
 }
@@ -111,7 +101,7 @@ input.switch:checked ~ label:after
 }
 
 .btn.btn-primary {
-  margin-top: -10px;
+  margin-top: 20px;
   margin-left: 800px;
 }
 .panel.panel-default{
