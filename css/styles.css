@@ -94,7 +94,7 @@ input.switch:checked ~ label:after
   padding-left: 20px;
 }
 
-.col-lg-1{
+.col-lg-1 pull-right{
   top: -160px;
   right: -240px;
   
