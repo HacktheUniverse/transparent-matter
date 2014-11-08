@@ -41,6 +41,11 @@
           <div class="range-length">
             <p>Radii</p>
             <input type="range" min="10" max="500" step="10" value="300">
+          <div class="col-md-4-bottom">
+          <form action="#" method="get">
+          <div class="onswitch pull-right">
+            <input type="checkbox" id="switch1" name="switch1" class="switch">
+            <label for="switch1">Dark Matter</label>
           </div>
           <button type="button" class="btn btn-primary">Make It Run!</button>
         </div>
@@ -68,7 +73,17 @@
         </div><!-- /.col-lg-1 -->
       </div><!-- row -->
 
-   <!--    <button type="button" class="btn btn-primary">Make It Run!</button> -->
+      <div class="range-length">
+        <p id="radii_value">Radii: 300</p>
+        <input type="range" min="10" max="500" step="10" value="300" onchange="OnSliderChanged (this)">
+      </div>
+      <button type="button" class="btn btn-primary">Make It Run!</button>
+      <script type="text/javascript">
+        function OnSliderChanged (slider) {
+            var sliderValue = document.getElementById ("radii_value");
+            sliderValue.innerHTML = "Radii: "+ slider.value;
+        } 
+    </script>
     </div> <!-- container-fluid -->
 
     <div class="panel panel-default">

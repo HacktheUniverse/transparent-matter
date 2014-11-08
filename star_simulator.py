@@ -14,9 +14,21 @@ import sys
 import os
 import numpy as np
 import numpy.random as random
+from matplotlib import rcParams
+import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import json
 import scipy.constants as cons
+rcParams["savefig.dpi"] = 150
+rcParams["axes.facecolor"] = '#000000'
+rcParams["axes.linewidth"]=2
+rcParams["axes.edgecolor"]='#dddddd'
+rcParams["figure.facecolor"]   = '#000000'
+rcParams["figure.edgecolor"]   = '#000000'
+rcParams["axes.labelcolor"] = '#ffffff'
+rcParams["xtick.color"] = '#ffffff'
+rcParams["ytick.color"] = '#ffffff'
+
 
 #define movement functions -- given an x,y return x',y'
 def rotate(x, y, theta):
@@ -47,10 +59,15 @@ def nfw_angular_velocity(Vv,cv,Rv,radius):
 if __name__ == "__main__":
     #set parameters
     #parameters = sys.argv[0]
-    parameters = {"dark_matter":True, "model": "NFW", "amount_dark_matter": 6, "distribution": "Scenario A"}
+    parameters = {"dark_matter":False, "model": "NFW", "amount_dark_matter": 6, "distribution": "Scenario A"}
+    if not parameters['dark_matter']:
+        pngnameroot= 'nodm'
+    else:
+        pngnameroot= parameters['model']        
+
     width = 50000
-    number_of_stars = 50
-    timesteps = 20
+    number_of_stars = 200
+    timesteps = 50
     lambda_ = 0.2  # exponential distribution of stars
     
     #constants
@@ -73,6 +90,7 @@ if __name__ == "__main__":
     stars_x = [stars_r[i]*np.cos(stars_theta[i]) for i in range(number_of_stars)]
     stars_y = [stars_r[i]*np.sin(stars_theta[i]) for i in range(number_of_stars)]
     
+
     
     #BUILD JSON
     positions = {0:{i:(stars_x[i], stars_y[i]) for i in range(number_of_stars)}} # save initial positions
@@ -101,26 +119,48 @@ if __name__ == "__main__":
     #orbits
     colors = ['r', 'b', 'g', 'k', 'c', 'm',]
     plt.figure(figsize=(6,6))
-#    for s in range(number_of_stars):
-#        x = [positions[t][s][0] for t in range(timesteps)]
-#        y = [positions[t][s][1] for t in range(timesteps)]
-#        plt.scatter(x,y,c = colors[s%len(colors)], linewidth=0)
-        
     for t in range(timesteps):
         for s in range(number_of_stars):
             x = positions[t][s][0]
             y = positions[t][s][1]
-            plt.scatter(x,y,c = colors[s%len(colors)], alpha = t/float(timesteps), linewidth=0)
+
+            plt.plot(x,y,'.',c = colors[s%len(colors)], alpha = t/float(timesteps), linewidth=0)
+        plt.xlim(-30000,30000)
+        plt.ylim(-30000,30000)
+#        plt.savefig(pngnameroot+"%02d.png"%t)
+
+    #
+    fig = plt.figure(facecolor='k')
+    ax = fig.add_subplot(111, autoscale_on=False, xlim=(-30000,30000), ylim=(-20000,30000))
+
+    nodmplot, = ax.plot([], [],'.', marker='o',c = '#ffffff')#,label='NO DM')
+    isoplot, = ax.plot([], [],'.', marker='o',c = '#ffffff')#,label='ISO')
+    nfwplot, = ax.plot([], [],'.', marker='o',c = '#ffffff')#,label='NFW')
+
+    def init():
+        nodmplot.set_data([], [])
+        isoplot.set_data([], [])
+        nfwplot.set_data([], [])
+        return nodmplot,isoplot,nfwplot
+    
+    def animate(t):
+        x=[positions[t][s][0] for s in range(number_of_stars)]
+        y=[positions[t][s][1] for s in range(number_of_stars)]
+        if not parameters['dark_matter']:
+            nodmplot.set_data(x,y)
+        elif parameters['dark_matter'] and parameters['model']=='ISO':
+            isoplot.set_data(x,y)
+        elif parameters['dark_matter'] and parameters['model']=='NFW':
+            nfwplot.set_data(x,y)
+        return nodmplot,isoplot,nfwplot
+
     #add universe center
-    plt.scatter([0], [0], c = 'y', s=60)
+    plt.scatter([0], [0], c = 'y', marker='o', s=60)
+    ani = animation.FuncAnimation(fig, animate, np.arange(1, timesteps),
+                                 interval=25, blit=False, init_func=init)
     #set graph properties
     plt.xlim((-width*1.1,width*1.1))
     plt.ylim((-width*1.1,width*1.1))
-    #radius distribution
-#    plt.figure()
-#    plt.hist([stars_r[s] for s in range(number_of_stars)])
-#    plt.xlabel('radius')
-#    plt.ylabel('number of stars')
-
+    plt.show()
     
     
