@@ -28,18 +28,7 @@ a.navbar-brand{
 .col-md-4-bottom{
   background-color: #bbeeff;
   height: 400px;
-  width: 462px;
-  display: inline-block;
-
 }
-
-form
-{
-  margin: 40px;
-  margin-right: 130px;
-}
-
-
 
 input.switch:empty
 {
