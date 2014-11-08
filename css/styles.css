@@ -19,6 +19,11 @@ a.navbar-brand{
   height: 400px;
 }
 
+.col-md-8-bottom{
+  background-color: #bbeeff;
+  height: 100px;
+}
+
 .col-md-4{
   background-color: #ffffff;
   height: 400px;
@@ -27,19 +32,8 @@ a.navbar-brand{
 
 .col-md-4-bottom{
   background-color: #bbeeff;
-  height: 400px;
-  width: 462px;
-  display: inline-block;
-
+  height: 100px;
 }
-
-form
-{
-  margin: 40px;
-  margin-right: 130px;
-}
-
-
 
 input.switch:empty
 {
