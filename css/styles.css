@@ -1,0 +1,26 @@
+body{
+  background-color: blue;
+}
+
+.col-md-8{
+  background-color: black;
+  height: 400px;
+}
+
+.col-md-4{
+  background-color: white;
+  height: 400px;
+}
+
+.col-md-4-bottom{
+  background-color: grey;
+  height: 400px;
+}
+
+.btn.btn-primary {
+  paddint-top: 30px;
+}
+.panel.panel-default{
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
