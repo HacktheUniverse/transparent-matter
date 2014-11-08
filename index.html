@@ -13,9 +13,7 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="css/styles.css" rel="stylesheet">
 
-    
-    
-
+  
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,41 +35,40 @@
         <div class="col-md-8"></div>
         <div class="col-md-4"></div>
       </div>
+
       <div class="row">
-        <div class="col-md-8"></div>
-          <div class="col-md-4-bottom">
-          <form action="#" method="get">
-          <div class="onswitch pull-right">
-            <input type="checkbox" id="switch1" name="switch1" class="switch" />
-            <label for="switch1">Dark Matter</label>
+        <div class="col-md-8-bottom">
+          <div class="range-length">
+            <p>Radii</p>
+            <input type="range" min="10" max="500" step="10" value="300">
           </div>
+          <button type="button" class="btn btn-primary">Make It Run!</button>
         </div>
+        <div class="col-md-4-bottom">
+          <form action="#" method="get">
+            <div class="onswitch pull-right">
+              <input type="checkbox" id="switch1" name="switch1" class="switch">
+              <label for="switch1">Dark Matter</label>
+            </div>
           </form>
-          <div class="row">
-            <div class="col-lg-1 pull-right">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="radio"> NFW
-                </span>
-              </div><!-- /input-group-->
-            </div> 
-           
-            <div class="col-lg-1 pull-right">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="radio"> ISO
-                </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-lg-1 -->
-          </div><!-- /.row -->
-        </div><!-- col-md-4 -->
+        </div>
+        <div class="col-lg-1 pull-right">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio"> NFW
+            </span>
+          </div><!-- /input-group-->
+        </div>    
+        <div class="col-lg-1 pull-right">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio"> ISO
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-1 -->
       </div><!-- row -->
 
-      <div class="range-length">
-        <p>Radii</p>
-        <input type="range" min="10" max="500" step="10" value="300">
-      </div>
-      <button type="button" class="btn btn-primary">Make It Run!</button>
+   <!--    <button type="button" class="btn btn-primary">Make It Run!</button> -->
     </div> <!-- container-fluid -->
 
     <div class="panel panel-default">
