@@ -22,12 +22,23 @@ a.navbar-brand{
 .col-md-4{
   background-color: #ffffff;
   height: 400px;
+
 }
 
 .col-md-4-bottom{
   background-color: #bbeeff;
   height: 400px;
+  width: 425px;
+  display: inline-block;
+
 }
+
+form
+{
+  margin: 40px;
+  margin-right: 130px;
+}
+
 
 
 input.switch:empty
@@ -89,19 +100,19 @@ input.switch:checked ~ label:after
 
 
 .btn-group{
-  top: 20px;
+  top: -250px;
   right: 60px;
   padding-left: 20px;
 }
 
-.col-lg-1 pull-right{
+.col-lg-1{
   top: -160px;
-  right: -240px;
+ padding-right: 140px;
   
 }
 
 .btn.btn-primary {
-  margin-top: 20px;
+  margin-top: -10px;
   margin-left: 800px;
 }
 .panel.panel-default{
