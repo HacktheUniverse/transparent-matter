@@ -13,7 +13,9 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="css/styles.css" rel="stylesheet">
 
-  
+    
+    
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,38 +34,18 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div id="anidiv" class="col-md-8"></div> <!--this one is the big black box-->
+        <div class="col-md-8" id="anidiv"></div>
         <div class="col-md-4"></div>
       </div>
-
       <div class="row">
-        <div class="col-md-8-bottom">
-          <div class="range-length">
-            <p>Radii</p>
-            <input type="range" min="10" max="500" step="10" value="300">
-          <div class="col-md-4-bottom">
-          <form action="#" method="get">
-          <div class="onswitch pull-right">
-            <input type="checkbox" id="switch1" name="switch1" class="switch">
-            <label for="switch1">Dark Matter</label>
-          </div>
-          <button type="button" class="btn btn-primary">Make It Run!</button>
-        </div>
-        <div class="col-md-4-bottom">
-          <form action="#" method="get">
-            <div class="onswitch pull-right">
-              <input type="checkbox" id="switch1" name="switch1" class="switch">
-              <label for="switch1">Dark Matter</label>
-            </div>
-          </form>
-        </div>
         <div class="col-lg-1 pull-right">
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="radio"> NFW
+              <input type="radio"> Dark Matter
             </span>
           </div><!-- /input-group-->
-        </div>    
+        </div> 
+       
         <div class="col-lg-1 pull-right">
           <div class="input-group">
             <span class="input-group-addon">
@@ -71,25 +53,32 @@
             </span>
           </div><!-- /input-group -->
         </div><!-- /.col-lg-1 -->
-      </div><!-- row -->
+
+        <div class="col-lg-1 pull-right">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="radio"> NFW
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-1 -->
+      </div><!-- /.row -->
 
       <div class="range-length">
         <p id="radii_value">Radii: 300</p>
         <input type="range" min="10" max="500" step="10" value="300" onchange="OnSliderChanged (this)">
       </div>
-      <button type="button" class="btn btn-primary" onclick="OnRun()">Make It Run!</button>
+      <button type="button" class="btn btn-primary" onclick="loadgif()">Make It Run!</button>
       <script type="text/javascript">
         function OnSliderChanged (slider) {
-            var sliderdiv = document.getElementById ("radii_value");
-            sliderdiv.innerHTML = "Radii: "+ slider.value;
+            var sliderValue = document.getElementById ("radii_value");
+            sliderValue.innerHTML = "Radii: "+ slider.value;
         } 
-        function OnRun(){
-            var sliderdiv = document.getElementById ("anidiv");
-            sliderdiv.innerHTML = "<img src=\"NFW_short.gif\">"
-	    console.log(sliderdiv.innderHTML)
-
+        function loadgif() {
+            var animationDiv = document.getElementById("anidiv");
+            animationDiv.innerHTML = "<img height=200 width=200 src=\"NFW_short.gif\">";
         }
     </script>
+
     </div> <!-- container-fluid -->
 
     <div class="panel panel-default">
