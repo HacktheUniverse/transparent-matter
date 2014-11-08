@@ -18,9 +18,17 @@ body{
 }
 
 .btn.btn-primary {
-  paddint-top: 30px;
+  margin-top: 20px;
+  margin-left: 700px;
 }
 .panel.panel-default{
   margin-top: 20px;
   margin-bottom: 0px;
+}
+
+.panel-footer {
+  height: 45px;
+}
+.panel-footer p{
+  float: right;
 }
