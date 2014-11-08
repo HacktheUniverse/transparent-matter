@@ -29,6 +29,15 @@ a.navbar-brand{
   height: 400px;
 }
 
+.col-lg-3{
+  padding: 20px;
+}
+
+.col-lg-1{
+  top: -200px;
+  right: 110px;
+}
+
 .btn.btn-primary {
   margin-top: 20px;
   margin-left: 700px;
