@@ -31,21 +31,22 @@ a.navbar-brand{
 
 .col-lg-3{
   padding: 40px;
+  right: 120px;
 }
 
 .btn-group{
-  top: -280px;
-  right: -875px;
+  top: -250px;
+  right: 90px;
 }
 
 .col-lg-1{
-  top: -220px;
-  right: -160px;
+  top: -160px;
+  right: -140px;
 }
 
 .btn.btn-primary {
-  margin-top: 20px;
-  margin-left: 700px;
+  margin-top: -10px;
+  margin-left: 800px;
 }
 .panel.panel-default{
   margin-top: 20px;
