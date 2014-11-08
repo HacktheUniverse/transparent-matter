@@ -68,10 +68,17 @@
       </div><!-- row -->
 
       <div class="range-length">
-        <p>Radii</p>
-        <input type="range" min="10" max="500" step="10" value="300">
+        <p id="radii_value">Radii: 300</p>
+        <input type="range" min="10" max="500" step="10" value="300" onchange="OnSliderChanged (this)">
       </div>
       <button type="button" class="btn btn-primary">Make It Run!</button>
+      <script type="text/javascript">
+        function OnSliderChanged (slider) {
+            var sliderValue = document.getElementById ("radii_value");
+            sliderValue.innerHTML = "Radii: "+ slider.value;
+        } 
+    </script>
+
     </div> <!-- container-fluid -->
 
     <div class="panel panel-default">
