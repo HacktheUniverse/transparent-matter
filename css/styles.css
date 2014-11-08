@@ -104,6 +104,18 @@ input.switch:checked ~ label:after
   margin-top: 20px;
   margin-left: 800px;
 }
+
+.range-length{
+  padding-top: 20px;
+  width: 67%;
+}
+
+.range-length p{
+  font-family: Droid Sans;
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
 .panel.panel-default{
   margin-top: 20px;
   margin-bottom: 0px;
