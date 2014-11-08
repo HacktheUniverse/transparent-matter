@@ -33,52 +33,28 @@
     </nav>
 
     <div class="container-fluid">
+    
+        <div class="col-md-6">
+          <div class="blah-radius">
+            <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <img src="default.png">
+        </div>
+      
+
       <div class="row">
-        <div class="col-md-8" id="anidiv"></div>
-        <div class="col-md-4"></div>
+        <div class="col-md-4"><img height=350 width=350 src="NFW_short.gif">
+          <p>Dark Matter</p>
+        </div>
+        <div class="col-md-4"><img height=350 width=350 src="NFW_short.gif">
+          <p>NFW</p>
+        </div>
+        <div class="col-md-4"><img height=350 width=350 src="NFW_short.gif">
+          <p>ISO</p>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-lg-1 pull-right">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <input type="radio"> Dark Matter
-            </span>
-          </div><!-- /input-group-->
-        </div> 
-       
-        <div class="col-lg-1 pull-right">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <input type="radio"> ISO
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-1 -->
-
-        <div class="col-lg-1 pull-right">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <input type="radio"> NFW
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-1 -->
-      </div><!-- /.row -->
-
-      <div class="range-length">
-        <p id="radii_value">Radii: 300</p>
-        <input type="range" min="10" max="500" step="10" value="300" onchange="OnSliderChanged (this)">
-      </div>
-      <button type="button" class="btn btn-primary" onclick="loadgif()">Make It Run!</button>
-      <script type="text/javascript">
-        function OnSliderChanged (slider) {
-            var sliderValue = document.getElementById ("radii_value");
-            sliderValue.innerHTML = "Radii: "+ slider.value;
-        } 
-        function loadgif() {
-            var animationDiv = document.getElementById("anidiv");
-            animationDiv.innerHTML = "<img height=200 width=200 src=\"NFW_short.gif\">";
-        }
-    </script>
-
     </div> <!-- container-fluid -->
 
     <div class="panel panel-default">
