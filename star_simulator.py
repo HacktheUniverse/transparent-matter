@@ -27,30 +27,34 @@ def rotate(x, y, theta):
     return x*np.cos(theta) - y*np.sin(theta), y*np.cos(theta) + x*np.sin(theta)
 
 def newton_angular_velocity(mass, radius):
+    #print radius, np.sqrt(cons.G*mass/radius/ly2m), np.sqrt(cons.G*mass/radius/ly2m)/(ly2m*radius)
     return np.sqrt(cons.G*mass/radius/ly2m)
     
 def iso_angular_velocity(Rc,Vinf, radius):
     tmp=1.0-Rc/radius/ly2m*np.arctan(radius*ly2m/Rc)
+    #print radius, Vinf*np.sqrt(tmp), Vinf*np.sqrt(tmp) / (radius * ly2m)
     return Vinf*np.sqrt(tmp)
     
-def nfw_angular_velocity(Vv,cv,Rv,R):
+def nfw_angular_velocity(Vv,cv,Rv,radius):
     gcinv=np.log(1.0+cv)-1.0/(1.0/cv+1.0)
-    s=R/Rv/kpc2ly
+    s=radius/Rv/kpc2ly
     cvs=cv*s
     vsq=Vv*Vv/s/gcinv*(np.log(1.0+cvs)-1.0/(1.0/cvs+1))
+    #print radius, np.sqrt(vsq), np.sqrt(vsq)/ (radius * ly2m)
     return np.sqrt(vsq)
 
 #Will be called with input as JSON
 if __name__ == "__main__":
     #set parameters
     #parameters = sys.argv[0]
-    parameters = {"dark_matter":False, "model": "ISO", "amount_dark_matter": 6, "distribution": "Scenario A"}
-    width = 50
-    number_of_stars = 5
-    timesteps = 2
+    parameters = {"dark_matter":True, "model": "NFW", "amount_dark_matter": 6, "distribution": "Scenario A"}
+    width = 50000
+    number_of_stars = 50
+    timesteps = 20
     lambda_ = 0.2  # exponential distribution of stars
     
     #constants
+    dt = 1e14
     kpc2ly=3261.63344
     ly2m=1.0/1.05702341e-16
     H=2.1e-18
@@ -77,11 +81,16 @@ if __name__ == "__main__":
         for s in range(number_of_stars):
             #rotate star's position
             if not parameters["dark_matter"]:
-                new_angle = newton_angular_velocity(M[gal], stars_r[s]) * stars_r[s] * 2
+                #print "NEWTON"
+                new_angle = dt*newton_angular_velocity(M[gal], stars_r[s]) / (stars_r[s] * ly2m)
             elif parameters["model"]=="ISO":
-                new_angle = iso_angular_velocity(M['Rc'],M['Vinf'],stars_r[s])
+                #print "ISO"
+                new_angle = dt*iso_angular_velocity(M['Rc'],M['Vinf'],stars_r[s]) / (stars_r[s] * ly2m)
             elif parameters["model"]=="NFW":
-                new_angle = nfw_angular_velocity(M['Vv'],M['cv'],M['Rv'],stars_r[s])
+                #print "NFW"
+                new_angle = dt* nfw_angular_velocity(M['Vv'],M['cv'],M['Rv'],stars_r[s]) / (stars_r[s] * ly2m)
+            else:
+                print "ERROR!"
             stars_x[s], stars_y[s] = rotate(stars_x[s], stars_y[s], new_angle)
             #save position
             positions[t][s] = (stars_x[s], stars_y[s])
@@ -92,20 +101,26 @@ if __name__ == "__main__":
     #orbits
     colors = ['r', 'b', 'g', 'k', 'c', 'm',]
     plt.figure(figsize=(6,6))
-    for s in range(number_of_stars):
-        x = [positions[t][s][0] for t in range(timesteps)]
-        y = [positions[t][s][1] for t in range(timesteps)]
-        plt.scatter(x,y,c = colors[s%len(colors)], linewidth=0)
+#    for s in range(number_of_stars):
+#        x = [positions[t][s][0] for t in range(timesteps)]
+#        y = [positions[t][s][1] for t in range(timesteps)]
+#        plt.scatter(x,y,c = colors[s%len(colors)], linewidth=0)
+        
+    for t in range(timesteps):
+        for s in range(number_of_stars):
+            x = positions[t][s][0]
+            y = positions[t][s][1]
+            plt.scatter(x,y,c = colors[s%len(colors)], alpha = t/float(timesteps), linewidth=0)
     #add universe center
     plt.scatter([0], [0], c = 'y', s=60)
     #set graph properties
     plt.xlim((-width*1.1,width*1.1))
     plt.ylim((-width*1.1,width*1.1))
     #radius distribution
-    #plt.figure()
-    #plt.hist([stars_r[s] for s in range(number_of_stars)])
-    #plt.xlabel('radius')
-    #plt.ylabel('number of stars')
+#    plt.figure()
+#    plt.hist([stars_r[s] for s in range(number_of_stars)])
+#    plt.xlabel('radius')
+#    plt.ylabel('number of stars')
 
     
     
