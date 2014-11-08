@@ -28,22 +28,15 @@ a.navbar-brand{
 .col-md-4-bottom{
   background-color: #bbeeff;
   height: 400px;
-  width: 425px;
-  display: inline-block;
-
 }
-
-form
-{
-  margin: 40px;
-  margin-right: 130px;
-}
-
-
 
 input.switch:empty
 {
-  margin-left: -999px;
+  margin-left: 100px;
+}
+
+input#switch1{
+  display: none;
 }
 
 input.switch:empty ~ label
@@ -97,7 +90,17 @@ input.switch:checked ~ label:after
   margin-left: 2.1em;
 }
 
-
+span.input-group-addon{
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #443030;
+  text-align: center;
+  background-color: none;
+  border: none;
+  border-radius: none;
+}
 
 .btn-group{
   top: -250px;
@@ -112,13 +115,14 @@ input.switch:checked ~ label:after
 }
 
 .btn.btn-primary {
-  margin-top: -10px;
+  margin-top: 20px;
   margin-left: 800px;
 }
 
 .range-length{
-  padding-top: 20px;
-  width: 67%;
+  padding-top: 5px;
+  padding-left: 40px;
+  width: 66%;
 }
 
 .range-length p{

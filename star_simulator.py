@@ -29,6 +29,7 @@ rcParams["axes.labelcolor"] = '#ffffff'
 rcParams["xtick.color"] = '#ffffff'
 rcParams["ytick.color"] = '#ffffff'
 
+
 #define movement functions -- given an x,y return x',y'
 def rotate(x, y, theta):
     """
@@ -65,8 +66,8 @@ if __name__ == "__main__":
         pngnameroot= parameters['model']        
 
     width = 50000
-    number_of_stars = 50
-    timesteps = 20
+    number_of_stars = 200
+    timesteps = 50
     lambda_ = 0.2  # exponential distribution of stars
     
     #constants
@@ -118,10 +119,6 @@ if __name__ == "__main__":
     #orbits
     colors = ['r', 'b', 'g', 'k', 'c', 'm',]
     plt.figure(figsize=(6,6))
-#    for s in range(number_of_stars):
-#        x = [positions[t][s][0] for t in range(timesteps)]
-#        y = [positions[t][s][1] for t in range(timesteps)]
-#        plt.scatter(x,y,c = colors[s%len(colors)], linewidth=0)
     for t in range(timesteps):
         for s in range(number_of_stars):
             x = positions[t][s][0]
@@ -132,16 +129,13 @@ if __name__ == "__main__":
         plt.ylim(-30000,30000)
 #        plt.savefig(pngnameroot+"%02d.png"%t)
 
+    #
     fig = plt.figure(facecolor='k')
     ax = fig.add_subplot(111, autoscale_on=False, xlim=(-30000,30000), ylim=(-20000,30000))
 
-    nodmplot, = ax.plot([], [],'.',c = '#ffffff')#,label='NO DM')
-    isoplot, = ax.plot([], [],'.',c = '#ffffff')#,label='ISO')
-    nfwplot, = ax.plot([], [],'.',c = '#ffffff')#,label='NFW')
-
-
-
-
+    nodmplot, = ax.plot([], [],'.', marker='o',c = '#ffffff')#,label='NO DM')
+    isoplot, = ax.plot([], [],'.', marker='o',c = '#ffffff')#,label='ISO')
+    nfwplot, = ax.plot([], [],'.', marker='o',c = '#ffffff')#,label='NFW')
 
     def init():
         nodmplot.set_data([], [])
@@ -161,22 +155,12 @@ if __name__ == "__main__":
         return nodmplot,isoplot,nfwplot
 
     #add universe center
-    plt.scatter([0], [0], c = 'y', s=60)
+    plt.scatter([0], [0], c = 'y', marker='o', s=60)
     ani = animation.FuncAnimation(fig, animate, np.arange(1, timesteps),
                                  interval=25, blit=False, init_func=init)
-            
-            
-    
-
-
     #set graph properties
     plt.xlim((-width*1.1,width*1.1))
     plt.ylim((-width*1.1,width*1.1))
-    #radius distribution
-#    plt.figure()
-#    plt.hist([stars_r[s] for s in range(number_of_stars)])
-#    plt.xlabel('radius (ly)')
-#    plt.ylabel('number of stars')
     plt.show()
     
     
