@@ -31,17 +31,19 @@ a.navbar-brand{
 
 .col-lg-3{
   padding: 40px;
-  right: 120px;
+  right: 80px;
 }
 
 .btn-group{
   top: -250px;
-  right: 90px;
+  right: 60px;
+  padding-left: 20px;
 }
 
 .col-lg-1{
   top: -160px;
-  right: -140px;
+  right: -240px;
+  
 }
 
 .btn.btn-primary {
