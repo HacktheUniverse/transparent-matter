@@ -1,0 +1,156 @@
+<html xmlns:xlink="http://www.w3.org/1999/xlink">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Dark matter visualization</title>
+</head>
+ 
+<body>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <div id="title" style="font-size: xx-large; font-weight:normal; font-family:courier;" align="center"><center>      How do you like </center>
+  <center>      your galaxies?</center>
+  </div>
+
+  <svg width="100%" height="50">
+  </svg>
+  <svg width="250" height="50">
+    <text x="20" y="20" fill="black">Millions of years elapsing</text>
+  </svg>
+  <script type="text/javascript">
+var d = document.getElementById('title');
+d.style.position = "absolute";
+d.style.left = document.documentElement.clientWidth/2-60;
+d.style.top = 0;
+  </script>
+  <script type="text/javascript">
+
+var start_val = 0,
+    end_val = [100000];
+var counterSVG = d3.select("body").append("svg").attr("width", 200).attr("height", 50);
+
+counterSVG.selectAll(".txt")
+    .data(end_val)
+    .enter()
+    .append("text")
+    .text(start_val)
+    .attr("class", "txt")
+    .attr("x", 0)
+    .attr("y", 20)
+    .transition()
+    .ease("linear")
+    .duration(1000*end_val)
+        .tween("text", function(d) {  
+            var i = d3.interpolate(this.textContent, d),
+                prec = (d + "").split("."),
+                round = (prec.length > 1) ? Math.pow(10, prec[1].length) : 1;
+
+            return function(t) {
+                this.textContent = Math.round(i(t) * round) / round;
+            };
+        });
+  </script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<div id="option">
+     
+    <input name="newtonButton" 
+           type="button" 
+           value="Only Luminous Matter" 
+           onclick="newtonian()" />
+    <input name="isoButton" 
+           type="button" 
+           value="With Dark Matter" 
+           onclick="isothermal()" />
+</div>
+  <svg width="250" height="100">
+    <a xlink:href="http://en.wikipedia.org/wiki/Galaxy_rotation_curve">
+        <text x="10" y="50">read more on Dark Matter...</text>
+    </a>
+    <a xlink:href="thisviz.html">
+        <text x="10" y="100">read more about this viz...</text>
+    </a>
+  </svg>
+
+  <script src="orbits.js" type="text/javascript"></script>
+  <script src="./randomColor.js"></script> 
+
+  <script type="text/javascript">
+ 
+
+ var svgWidth = window.innerWidth,
+     svgHeight = window.innerHeight-100,
+     nodes = d3.range(200).map(function() { return { 
+     radius: Math.exp(Math.random() * Math.log(d3.max([350,d3.min([svgHeight/2-130,svgWidth/2-100])]))),
+     angle: Math.random()*Math.PI*2.0
+     }});
+//     console.log(d3.max([700,d3.min([svgHeight/2-130,svgWidth/2-100])]));
+
+//console.log(nodes.length, nodes[0].angle);
+ 
+
+function float2int (value) {
+    return value | 0;
+}
+var margin = {top: 0, right: 10, bottom: 30, left: 60},
+    width =  svgWidth - margin.left - margin.right,
+    height = svgHeight  - margin.top - margin.bottom;
+
+creategal("static");
+
+
+function creategal(potential){
+// Svg we will draw to
+
+if (potential=="static"){
+ console.log("starting static")
+}
+else{
+d3.select("#galViz").remove();
+}
+var svgContainer = d3.select("body")
+   .append("svg")   
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .attr("nodes", nodes)
+      .attr("id", "galViz")
+   .append("g")
+      .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
+
+console.log(svgContainer);
+
+
+
+var circles = svgContainer.selectAll("circle");
+//                           .data(nodes)
+//                           .enter()
+//                           .append("circle");
+                           
+                           
+
+var middlex=document.documentElement.clientWidth/2;
+    middley=document.documentElement.clientHeight/2-220;
+
+for (var i = 0; i < nodes.length; i++) {
+    svgContainer.append("circle")
+    .attr("id",i)		     
+    .attr("angle",nodes[i].angle)
+    .attr("r",10)		    
+    .attr("cx", 0)
+    .attr("cy", 0)
+    .attr("data-orbit-r",nodes[i].radius)
+    .style("fill", randomColor({hue:'orange'}))
+    .style("zafill-opacity", 0.5)
+    }
+
+
+var system = createGalaxy(svgContainer.node(), document.querySelectorAll('circle'),potential);
+		    system.cx = middlex;
+		    system.cy = middley;
+		    system.start();
+}
+function isothermal(){creategal("iso")}
+function newtonian() {creategal("newtonian")}
+
+</script>
+</body>
+</html>
